@@ -19,6 +19,10 @@ app.get("/", (req, res) => {
   //projeto-crud/public/index.html --> localhost:3000/
 });
 
+const apiRoutes = require("./routes/api"); //buscando as rotas
+app.use(express.json()); //requisições do front virão no formato JSON
+app.use("/api/users", apiRoutes); //definindo as rotas de usuários
+
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });

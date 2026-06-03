@@ -19,7 +19,7 @@
   "homepage": "https://github.com/dacostavictor/Projeto---CRUD#readme",
   "dependencies": {
     "express": "^5.2.1",
-    "mysql2": "^3.22.3"
+    "mysql2": "^3.22.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

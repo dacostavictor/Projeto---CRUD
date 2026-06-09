@@ -23,10 +23,29 @@ function listarUsuarios() {
       data.forEach((user) => {
         const li = document.createElement("li");
         li.innerHTML = `Nome: ${user.nome} - Email: ${user.email}
+            <button onclick="editar(${user.id})" class="editar">Editar</button>
             <button onclick="excluirUsuario(${user.id})" class="excluir">Excluir</button>`;
         userList.appendChild(li);
       });
     });
+}
+
+function editar(id) {
+  const nome = prompt("Digite seu nome: ");
+  const email = prompt("Digite seu email: ");
+
+  if (nome.length == 0 || email.length == 0) {
+    alert("O nome e email devem ser ambos preenchidos!");
+    return;
+  }
+
+  fetch(`api/users/editar/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nome, email }),
+  }).then(() => {
+    listarUsuarios();
+  });
 }
 
 function excluirUsuario(id) {

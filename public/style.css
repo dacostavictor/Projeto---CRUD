@@ -55,3 +55,16 @@ input {
 .excluir:hover {
   background-color: rgb(250, 55, 55);
 }
+
+.editar {
+  border: none;
+  border-radius: 2px;
+  background-color: rgb(1, 185, 1);
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
+
+.editar:hover {
+  background-color: rgb(0, 212, 0);
+}

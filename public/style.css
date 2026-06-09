@@ -1,37 +1,57 @@
 body {
-  background-color: rgb(39, 39, 39);
+  background-color: rgb(34, 34, 34);
   color: white;
   font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
 }
 
 h1,
 h2,
-#formulario {
+#formulario,
+#user-list {
   text-align: center;
 }
 
-input {
-  width: 300px;
-  height: 24px;
-  background-color: rgb(168, 168, 168);
-  font-size: 16px;
+#user-list {
+  list-style-type: none;
+  padding: 0;
 }
 
-button {
+li {
+  margin-bottom: 7px;
+}
+
+#cadastrar {
+  background-color: blue;
   color: white;
-  background-color: rgb(204, 2, 2);
-  width: 150px;
-  height: 40px;
-  border-radius: 5px;
   border: none;
-  transition:
-    transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-    opacity 0.3s ease;
-  cursor: pointer;
+  border-radius: 5px;
+  width: 175px;
+  height: 35px;
   font-size: 24px;
+  transition: 0.5s;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-button:hover {
-  background-color: rgb(235, 1, 1);
+#cadastrar:hover {
+  background-color: rgb(59, 59, 255);
   transform: scale(1.1);
+}
+
+input {
+  margin-top: 5px;
+}
+
+.excluir {
+  border: none;
+  border-radius: 2px;
+  background-color: red;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
+
+.excluir:hover {
+  background-color: rgb(250, 55, 55);
 }

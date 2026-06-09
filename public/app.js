@@ -1,24 +1,56 @@
-//lógica para capturar os dados do HTML
 const form = document.getElementById("user-form");
 const userList = document.getElementById("user-list");
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault(); //evitar o formulário recarregar a página
-  const nome = document.getElementById("nome").value;
-  const email = document.getElementById("email").value;
-  console.log(nome);
-  console.log(email);
-
-  cadastrarUsuario(nome, email); //chamar a função cadastrar usuário
-});
-
 function cadastrarUsuario(nome, email) {
   fetch("/api/users/cadastrar", {
-    //caminho para o servidor (backend)
+    // Caminho para o servidor
     method: "POST",
-    headers: { "Content-Type": "application/json" }, //mensagem é do tipo JSON
-    body: JSON.stringify({ nome, email }), //converter o objeto em uma string json
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nome, email }),
   }).then(() => {
-    form.reset(); //limpar o formulário
+    form.reset();
+    listarUsuarios();
   });
 }
+
+function listarUsuarios() {
+  fetch("/api/users/listar", {
+    method: "GET",
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      userList.innerHTML = "";
+      data.forEach((user) => {
+        const li = document.createElement("li");
+        li.innerHTML = `Nome: ${user.nome} - Email: ${user.email}
+            <button onclick="excluirUsuario(${user.id})" class="excluir">Excluir</button>`;
+        userList.appendChild(li);
+      });
+    });
+}
+
+function excluirUsuario(id) {
+  const confirmacao = confirm(
+    `Você tem certeza de que deseja excluir o usuário selecionado?`,
+  );
+  if (!confirmacao) {
+    return;
+  }
+
+  fetch(`api/users/excluir/${id}`, {
+    method: "DELETE",
+  }).then(() => {
+    listarUsuarios();
+  });
+}
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault(); // Evita recarregar página
+
+  const nome = document.getElementById("nome").value;
+  const email = document.getElementById("email").value;
+
+  cadastrarUsuario(nome, email);
+});
+
+listarUsuarios();

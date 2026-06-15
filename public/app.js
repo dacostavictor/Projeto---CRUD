@@ -2,7 +2,7 @@ const form = document.getElementById("user-form");
 const userList = document.getElementById("user-list");
 
 function cadastrarUsuario(nome, email) {
-  fetch("/api/users/cadastrar", {
+  fetch("/api/users/cadastrar/", {
     // Caminho para o servidor
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -66,7 +66,7 @@ function excluirUsuario(id) {
     return;
   }
 
-  fetch(`api/users/excluir/${id}`, {
+  fetch(`/api/users/excluir/${id}`, {
     method: "DELETE",
   }).then(() => {
     listarUsuarios();

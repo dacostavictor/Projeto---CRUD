@@ -34,20 +34,17 @@ router.get("/listar", (req, res) => {
 
 //UPDATE: PUT: (UPDATE)
 router.put("/editar/:id", (req, res) => {
-  //extrair os dados
-  const { nome, email } = req.body; //corpo da requisição
-  const { id } = req.params; //parametro da requisição
+  const { nome, email } = req.body;
+  const { id } = req.params;
 
-  //executar a instrução sql
-  (db.query("UPDATE users SET nome = ?, email = ? WHERE id = ?", [
-    nome,
-    email,
-    id,
-  ]),
+  db.query(
+    "UPDATE users SET nome = ?, email = ? WHERE id = ?",
+    [nome, email, id],
     (err) => {
       if (err) return res.status(500).send(err);
       res.json({ id, nome, email });
-    });
+    },
+  );
 });
 
 //DELETE: DELETE (DELETE)

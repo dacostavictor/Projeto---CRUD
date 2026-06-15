@@ -30,22 +30,32 @@ function listarUsuarios() {
     });
 }
 
+// app.js — função editar com verificação de resposta
 function editar(id) {
   const nome = prompt("Digite seu nome: ");
   const email = prompt("Digite seu email: ");
 
-  if (nome.length == 0 || email.length == 0) {
+  if (!nome || nome.length === 0 || !email || email.length === 0) {
     alert("O nome e email devem ser ambos preenchidos!");
     return;
   }
 
-  fetch(`api/users/editar/${id}`, {
+  fetch(`/api/users/editar/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ nome, email }),
-  }).then(() => {
-    listarUsuarios();
-  });
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Erro ao editar usuário");
+      return res.json();
+    })
+    .then(() => {
+      listarUsuarios();
+    })
+    .catch((err) => {
+      alert("Não foi possível editar o usuário.");
+      console.error(err);
+    });
 }
 
 function excluirUsuario(id) {

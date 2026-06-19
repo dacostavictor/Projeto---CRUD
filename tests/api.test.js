@@ -1,8 +1,8 @@
-// tests/api.test.js
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import request from "supertest";
-import db from "../db.js";
-import app from "../expressApp.js";
+
+const db = require("../db");
+const app = require("../expressApp");
 
 describe("API de usuários", () => {
   let queryMock;
